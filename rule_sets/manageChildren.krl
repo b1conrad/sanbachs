@@ -1,5 +1,10 @@
 ruleset manageChildren {
   meta {
+    name "Manage Children"
+    description <<
+A ruleset using Wrangler to manage children
+>>
+    logging on
     use module v1_wrangler alias wrangler
     author "Bruce Conrad"
     provides children
