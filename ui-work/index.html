@@ -1,0 +1,144 @@
+<html>
+<head>
+<title>Closet demo</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('div.pico').draggable({ containment: "parent" })
+               .click(function(){alert(this)});;
+  $('svg line').click(function(){alert(this)});
+  $('div.pico ul li.primary')
+    .click(about_primary_pico);
+});
+function about_primary_pico(ev) {
+  window.location = "http://kre.github.io/devtools/index.html#about";
+  ev.stopPropagation();
+}
+</script>
+<style type="text/css">
+div.pico {
+  opacity: 1.0;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 25px;
+  padding: 10px;
+  z-index: 1000;
+}
+div.pico ul {
+  margin: 0px;
+  padding: 0 0 0 20px;
+  font-size: 70%;
+}
+div.pico ul li.primary {
+  cursor: pointer;
+}
+svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+svg line {
+  stroke: #000;
+  stroke-width: 5px;
+}
+div p {
+  display: inline-block;
+  position: absolute;
+  width: 250px;
+  font-size: 120%;
+  padding-left: 20px;
+}
+</style>
+</head>
+<body>
+<a href="https://picolabs.io"><img src="logo.png" alt="logo"></a>
+<div style="position:relative">
+<p style="">
+Picos allow actor-based systems to be constructed.
+This is reflected in our Closet Demo.
+</p>
+<div class="pico" style="left:800px;top:10px;background-color:lightskyblue">
+Owner Pico
+<ul>
+<li class="primary">About</li>
+<li>Rulesets</li>
+<li>Channels</li>
+<li>Subscriptions</li>
+<li>Logging</li>
+</ul>
+</div>
+<div class="pico" style="left:450px;top:150px;background-color:aquamarine">
+Closet Collection Pico
+<ul>
+<li>About</li>
+<li>Rulesets</li>
+<li>Channels</li>
+<li>Subscriptions</li>
+<li>Logging</li>
+</ul>
+</div>
+<div class="pico" style="left:600px;top:300px;background-color:aquamarine">
+Fan Collection Pico
+<ul>
+<li>About</li>
+<li>Rulesets</li>
+<li>Channels</li>
+<li>Subscriptions</li>
+<li>Logging</li>
+</ul>
+</div>
+<div class="pico" style="left:200px;top:370px;background-color:hotpink">
+Inside Temp Pico
+<ul>
+<li>About</li>
+<li>Rulesets</li>
+<li>Channels</li>
+<li>Subscriptions</li>
+<li>Logging</li>
+</ul>
+</div>
+<div class="pico" style="left:350px;top:400px;background-color:hotpink">
+Outside Temp Pico
+<ul>
+<li>About</li>
+<li>Rulesets</li>
+<li>Channels</li>
+<li>Subscriptions</li>
+<li>Logging</li>
+</ul>
+</div>
+<div class="pico" style="left:500px;top:500px;background-color:lightsteelblue">
+Cooling Fan A Pico
+<ul>
+<li>About</li>
+<li>Rulesets</li>
+<li>Channels</li>
+<li>Subscriptions</li>
+<li>Logging</li>
+</ul>
+</div>
+<div class="pico" style="left:700px;top:500px;background-color:lightsteelblue">
+Cooling Fan B Pico
+<ul>
+<li>About</li>
+<li>Rulesets</li>
+<li>Channels</li>
+<li>Subscriptions</li>
+<li>Logging</li>
+</ul>
+</div>
+<svg>
+  <line x1="850" y1="60" x2="500" y2="200"></line>
+  <line x1="500" y1="200" x2="650" y2="350"></line>
+  <line x1="500" y1="200" x2="250" y2="450"></line>
+  <line x1="500" y1="200" x2="400" y2="420"></line>
+  <line x1="650" y1="350" x2="550" y2="550"></line>
+  <line x1="650" y1="350" x2="750" y2="550"></line>
+</svg>
+</div>
+</body>
+</html>

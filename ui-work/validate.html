@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Validate KRL ruleset</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="jquery-linedtextarea.js"></script>
+<link href="jquery-linedtextarea.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<h2>Copy and paste your KRL into the box below</h2>
+
+<p>
+The KRL must be in the form of a ruleset, not just a rule.  
+</p>
+
+<form method="post" action="https://cs.kobj.net/manage/validate/">
+
+<textarea class="lined" name="rule" rows="20" cols="80">
+ruleset createChildren {
+  rule createAChild {
+    select when pico_systems child_requested
+    pre{
+      random_name = "Test_Child_" + math:random(999);
+      name = event:attr("name").defaultsTo(random_name);
+    }
+    {
+      wrangler:createChild(name);
+    }
+    always{
+      log("create child names " + name);
+    }
+  }
+}
+
+</textarea>
+
+<p>
+Flavor:
+<select name="flavor">
+<option value="html" selected="selected">HTML</option>
+<option value="json">JSON</option>
+</select>
+<input type="submit" value="Validate!">
+</p>
+
+
+</form>
+
+
+
+<script type="text/javascript">
+$(function() {
+	$(".lined").linedtextarea();
+});
+</script>
+
+</body>
+</html>
