@@ -22,6 +22,8 @@ A ruleset using Wrangler to manage children
     }
     {
       wrangler:createChild(name);
+      send_directive("ack") with
+        name = name;
     }
     always{
       log("created child named " + name);
