@@ -6,7 +6,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-  $('div.pico').draggable({ containment: "parent" })
+  var dragmove = function(event,ui) {
+    var theId = ui.helper[0].getAttribute("id");
+    var theCenterLeft = ui.position.left + 50;
+    var theCenterTop = ui.position.top + 50;
+    $('.'+theId+'-origin').attr({x1:theCenterLeft,y1:theCenterTop});
+    $('.'+theId+'-target').attr({x2:theCenterLeft,y2:theCenterTop});
+  }
+  $('div.pico').draggable({ containment: "parent",
+                            drag: dragmove })
                .click(function(){alert(this)});;
   $('svg line').click(function(){alert(this)});
   $('div.pico ul li.primary')
@@ -61,7 +69,7 @@ div p {
 Registration experiment has a Pico for each
 section and one for each registering student.
 </p>
-<div class="pico" style="left:800px;top:10px;background-color:lightskyblue">
+<div class="pico" id="p1" style="left:800px;top:10px;background-color:lightskyblue">
 Owner Pico
 <ul>
 <li class="primary">About</li>
@@ -71,7 +79,7 @@ Owner Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" style="left:450px;top:150px;background-color:aquamarine">
+<div class="pico" id="p2" style="left:450px;top:150px;background-color:aquamarine">
 Registration Pico
 <ul>
 <li>About</li>
@@ -81,7 +89,7 @@ Registration Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" style="left:600px;top:300px;background-color:aquamarine">
+<div class="pico" id="p3" style="left:600px;top:300px;background-color:aquamarine">
 Student Collection Pico
 <ul>
 <li>About</li>
@@ -91,7 +99,7 @@ Student Collection Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" style="left:250;top:300px;background-color:aquamarine">
+<div class="pico" id="p4" style="left:250;top:300px;background-color:aquamarine">
 Section Collection Pico
 <ul>
 <li>About</li>
@@ -101,7 +109,7 @@ Section Collection Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" style="left:150px;top:500px;background-color:hotpink">
+<div class="pico" id="p5" style="left:150px;top:500px;background-color:hotpink">
 Section CS462-1 Pico
 <ul>
 <li>About</li>
@@ -111,7 +119,7 @@ Section CS462-1 Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" style="left:350px;top:500px;background-color:hotpink">
+<div class="pico" id="p6" style="left:350px;top:500px;background-color:hotpink">
 Section CS462-2 Pico
 <ul>
 <li>About</li>
@@ -121,7 +129,7 @@ Section CS462-2 Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" style="left:500px;top:500px;background-color:lightsteelblue">
+<div class="pico" id="p7" style="left:500px;top:500px;background-color:lightsteelblue">
 Student A Pico
 <ul>
 <li>About</li>
@@ -131,7 +139,7 @@ Student A Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" style="left:700px;top:500px;background-color:lightsteelblue">
+<div class="pico" id="p8" style="left:700px;top:500px;background-color:lightsteelblue">
 Student B Pico
 <ul>
 <li>About</li>
@@ -142,13 +150,13 @@ Student B Pico
 </ul>
 </div>
 <svg>
-  <line x1="850" y1="60" x2="500" y2="200"></line>
-  <line x1="500" y1="200" x2="650" y2="350"></line>
-  <line x1="500" y1="200" x2="350" y2="350"></line>
-  <line x1="300" y1="350" x2="200" y2="550"></line>
-  <line x1="300" y1="350" x2="400" y2="550"></line>
-  <line x1="650" y1="350" x2="550" y2="550"></line>
-  <line x1="650" y1="350" x2="750" y2="550"></line>
+  <line class="p1-origin p2-target" x1="850" y1="60" x2="500" y2="200"></line>
+  <line class="p2-origin p3-target" x1="500" y1="200" x2="650" y2="350"></line>
+  <line class="p2-origin p4-target" x1="500" y1="200" x2="300" y2="350"></line>
+  <line class="p4-origin p5-target" x1="300" y1="350" x2="200" y2="550"></line>
+  <line class="p4-origin p6-target" x1="300" y1="350" x2="400" y2="550"></line>
+  <line class="p3-origin p7-target" x1="650" y1="350" x2="550" y2="550"></line>
+  <line class="p3-origin p8-target" x1="650" y1="350" x2="750" y2="550"></line>
 </svg>
 </div>
 </body>
