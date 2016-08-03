@@ -41,21 +41,25 @@ $(document).ready(function() {
     var nodeId = ui.helper[0].getAttribute("id");
     updateLines(nodeId,ui.position.left,ui.position.top);
   }
+  var dragstop = function(event,ui) {
+    var nodeId = ui.helper[0].getAttribute("id");
+    $('#'+nodeId).next(".pico-edit").css('left',ui.position.left)
+                                    .css('top',ui.position.top);
+  }
   var fadeInOptions = {
     width: "95%",
     height: "85%",
     top: 0,
-    left: 0,
-    zIndex: 1001 };
+    left: 0 };
+  var fadeOutOptions;
   $('div.pico')
-    .draggable({ containment: "parent", drag: dragmove })
+    .draggable({ containment: "parent", drag: dragmove, stop: dragstop })
     .click(function(){
-             var fadeOutOptions = {
+             fadeOutOptions = {
                width: $(this).css('width'),
                height: $(this).css('height'),
                top: $(this).css('top'),
-               left: $(this).css('left'),
-               zIndex: 1000 };
+               left: $(this).css('left') };
              var $pediv = $(this).next('.pico-edit');
              var fadeAway = function(ev) {
                               $pediv.find('.x').fadeOut();
@@ -98,10 +102,8 @@ div.pico {
 div.pico-edit {
   display: none;
   position: absolute;
-  width: 95%;
-  height: 85%;
-  top: 0;
-  left: 0;
+  width: 100px;
+  height: 100px;
   border: 1px solid black;
   border-radius: 25px;
   padding: 10px;
@@ -163,7 +165,7 @@ section and one for each registering student.
 <div class="pico" id="p1" style="width:80px;left:800px;top:10px;background-color:lightskyblue">
 Owner Pico
 </div>
-<div class="pico-edit" style="background-color:lightskyblue">
+<div class="pico-edit" style="width:80px;left:800px;top:10px;background-color:lightskyblue">
 <button class="x">X</button>
 Owner Pico
 <ul>
@@ -178,7 +180,7 @@ Owner Pico
 <div class="pico" id="p2" style="width:120px;left:450px;top:150px;background-color:aquamarine">
 Registration Pico
 </div>
-<div class="pico-edit" style="background-color:aquamarine">
+<div class="pico-edit" style="width:120px;left:450px;top:150px;background-color:aquamarine">
 <button class="x">X</button>
 Registration Pico
 <ul>
@@ -193,7 +195,7 @@ Registration Pico
 <div class="pico" id="p3" style="width:160px;left:600px;top:300px;background-color:aquamarine">
 Student Collection Pico
 </div>
-<div class="pico-edit" style="background-color:aquamarine">
+<div class="pico-edit" style="width:160px;left:600px;top:300px;background-color:aquamarine">
 <button class="x">X</button>
 Student Collection Pico
 <ul>
@@ -208,7 +210,7 @@ Student Collection Pico
 <div class="pico" id="p4" style="width:160px;left:250;top:300px;background-color:aquamarine">
 Section Collection Pico
 </div>
-<div class="pico-edit" style="background-color:aquamarine">
+<div class="pico-edit" style="width:160px;left:250;top:300px;background-color:aquamarine">
 <button class="x">X</button>
 Section Collection Pico
 <ul>
@@ -223,7 +225,7 @@ Section Collection Pico
 <div class="pico" id="p5" style="width:150px;left:150px;top:500px;background-color:hotpink">
 Section CS462-1 Pico
 </div>
-<div class="pico-edit" style="background-color:hotpink">
+<div class="pico-edit" style="width:150px;left:150px;top:500px;background-color:hotpink">
 <button class="x">X</button>
 Section CS462-1 Pico
 <ul>
@@ -238,7 +240,7 @@ Section CS462-1 Pico
 <div class="pico" id="p6" style="width:150px;left:350px;top:500px;background-color:hotpink">
 Section CS462-2 Pico
 </div>
-<div class="pico-edit" style="background-color:hotpink">
+<div class="pico-edit" style="width:150px;left:350px;top:500px;background-color:hotpink">
 <button class="x">X</button>
 Section CS462-2 Pico
 <ul>
@@ -253,7 +255,7 @@ Section CS462-2 Pico
 <div class="pico" id="p7" style="left:500px;top:500px;background-color:lightsteelblue">
 Student A Pico
 </div>
-<div class="pico-edit" style="background-color:lightsteelblue">
+<div class="pico-edit" style="left:500px;top:500px;background-color:lightsteelblue">
 <button class="x">X</button>
 Student A Pico
 <ul>
@@ -268,7 +270,7 @@ Student A Pico
 <div class="pico" id="p8" style="left:700px;top:500px;background-color:lightsteelblue">
 Student B Pico
 </div>
-<div class="pico-edit" style="background-color:lightsteelblue">
+<div class="pico-edit" style="left:700px;top:500px;background-color:lightsteelblue">
 <button class="x">X</button>
 Student B Pico
 <ul>
