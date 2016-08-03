@@ -41,9 +41,33 @@ $(document).ready(function() {
     var nodeId = ui.helper[0].getAttribute("id");
     updateLines(nodeId,ui.position.left,ui.position.top);
   }
-  $('div.pico').draggable({ containment: "parent",
-                            drag: dragmove })
-               .click(function(){alert(this)});;
+  var fadeInOptions = {
+    width: "95%",
+    height: "85%",
+    top: 0,
+    left: 0,
+    zIndex: 1001 };
+  $('div.pico')
+    .draggable({ containment: "parent", drag: dragmove })
+    .click(function(){
+             var fadeOutOptions = {
+               width: $(this).css('width'),
+               height: $(this).css('height'),
+               top: $(this).css('top'),
+               left: $(this).css('left'),
+               zIndex: 1000 };
+             var $pediv = $(this).next('.pico-edit');
+             var fadeAway = function(ev) {
+                              $pediv.find('.x').fadeOut();
+                              $pediv.animate(fadeOutOptions);
+                              $pediv.fadeOut();
+                              ev.stopPropagation();
+                            };
+             $pediv.fadeIn();
+             $pediv.animate(fadeInOptions);
+             $pediv.find('.x').fadeIn();
+             $pediv.find('.x').click(fadeAway);
+           });
   $('svg line').click(function(){alert(this)});
   $('div.pico ul li.primary')
     .click(about_primary_pico);
@@ -63,7 +87,6 @@ function about_primary_pico(ev) {
 </script>
 <style type="text/css">
 div.pico {
-  opacity: 1.0;
   position: absolute;
   width: 100px;
   height: 100px;
@@ -72,10 +95,29 @@ div.pico {
   padding: 10px;
   z-index: 1000;
 }
-div.pico ul {
+div.pico-edit {
+  display: none;
+  position: absolute;
+  width: 95%;
+  height: 85%;
+  top: 0;
+  left: 0;
+  border: 1px solid black;
+  border-radius: 25px;
+  padding: 10px;
+  margin-right: 50px;
+  z-index: 1001;
+}
+div.pico-edit ul {
   margin: 0px;
   padding: 0 0 0 20px;
   font-size: 70%;
+}
+div.pico-edit .x {
+  display: none;
+}
+div.pico-edit button {
+  float: right;
 }
 div.pico ul li.primary {
   cursor: pointer;
@@ -96,16 +138,33 @@ div p {
   font-size: 120%;
   padding-left: 20px;
 }
+h1.title {
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  margin: 0 0 0 120px;
+  padding-top: 18px;
+}
+a.logo img {
+  vertical-align: top;
+}
+a.logo {
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
-<a href="https://picolabs.io"><img src="logo.png" alt="logo"></a>
-<div style="position:relative">
+<a class="logo" href="https://picolabs.io"><img src="logo.png" alt="logo"></a>
+<h1 class="title">Registration experiment</h1>
+<div id="container" style="position:relative">
 <p style="">
 Registration experiment has a Pico for each
 section and one for each registering student.
 </p>
 <div class="pico" id="p1" style="width:80px;left:800px;top:10px;background-color:lightskyblue">
+Owner Pico
+</div>
+<div class="pico-edit" style="background-color:lightskyblue">
+<button class="x">X</button>
 Owner Pico
 <ul>
 <li class="primary">About</li>
@@ -113,9 +172,14 @@ Owner Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
+<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p2" style="width:120px;left:450px;top:150px;background-color:aquamarine">
+Registration Pico
+</div>
+<div class="pico-edit" style="background-color:aquamarine">
+<button class="x">X</button>
 Registration Pico
 <ul>
 <li>About</li>
@@ -123,9 +187,14 @@ Registration Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
+<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p3" style="width:160px;left:600px;top:300px;background-color:aquamarine">
+Student Collection Pico
+</div>
+<div class="pico-edit" style="background-color:aquamarine">
+<button class="x">X</button>
 Student Collection Pico
 <ul>
 <li>About</li>
@@ -133,9 +202,14 @@ Student Collection Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
+<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p4" style="width:160px;left:250;top:300px;background-color:aquamarine">
+Section Collection Pico
+</div>
+<div class="pico-edit" style="background-color:aquamarine">
+<button class="x">X</button>
 Section Collection Pico
 <ul>
 <li>About</li>
@@ -143,9 +217,14 @@ Section Collection Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
+<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p5" style="width:150px;left:150px;top:500px;background-color:hotpink">
+Section CS462-1 Pico
+</div>
+<div class="pico-edit" style="background-color:hotpink">
+<button class="x">X</button>
 Section CS462-1 Pico
 <ul>
 <li>About</li>
@@ -153,9 +232,14 @@ Section CS462-1 Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
+<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p6" style="width:150px;left:350px;top:500px;background-color:hotpink">
+Section CS462-2 Pico
+</div>
+<div class="pico-edit" style="background-color:hotpink">
+<button class="x">X</button>
 Section CS462-2 Pico
 <ul>
 <li>About</li>
@@ -163,9 +247,14 @@ Section CS462-2 Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
+<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p7" style="left:500px;top:500px;background-color:lightsteelblue">
+Student A Pico
+</div>
+<div class="pico-edit" style="background-color:lightsteelblue">
+<button class="x">X</button>
 Student A Pico
 <ul>
 <li>About</li>
@@ -173,9 +262,14 @@ Student A Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
+<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p8" style="left:700px;top:500px;background-color:lightsteelblue">
+Student B Pico
+</div>
+<div class="pico-edit" style="background-color:lightsteelblue">
+<button class="x">X</button>
 Student B Pico
 <ul>
 <li>About</li>
@@ -183,6 +277,7 @@ Student B Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
+<li class="x">Done</li>
 </ul>
 </div>
 <svg>
