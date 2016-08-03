@@ -6,12 +6,40 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+  var leftRadius = function(nodeId) {
+    var theNode = $('#'+nodeId);
+    return Math.floor(
+             (parseFloat(theNode.css('border-left'))
+             +parseFloat(theNode.css('padding-left'))
+             +parseFloat(theNode.css('width'))
+             +parseFloat(theNode.css('padding-right'))
+             +parseFloat(theNode.css('border-right'))
+             )/2);
+  }
+  var topRadius = function(nodeId) {
+    var theNode = $('#'+nodeId);
+    return Math.floor(
+             (parseFloat(theNode.css('border-top'))
+             +parseFloat(theNode.css('padding-top'))
+             +parseFloat(theNode.css('height'))
+             +parseFloat(theNode.css('padding-bottom'))
+             +parseFloat(theNode.css('border-bottom'))
+             )/2);
+  }
+  var updateLines = function(nodeId,theLeft,theTop) {
+    var lR = leftRadius(nodeId);
+    var tR = topRadius(nodeId);
+    $('.'+nodeId+'-origin').attr({x1:theLeft+lR+'px',y1:theTop+tR+'px'});
+    $('.'+nodeId+'-target').attr({x2:theLeft+lR+'px',y2:theTop+tR+'px'});
+  }
+  var updateEdges = function(nodeId) {
+    var theLeft = parseFloat($('#'+nodeId).css('left'));
+    var theTop = parseFloat($('#'+nodeId).css('top'));
+    updateLines(nodeId,theLeft,theTop);
+  }
   var dragmove = function(event,ui) {
-    var theId = ui.helper[0].getAttribute("id");
-    var theCenterLeft = ui.position.left + 50;
-    var theCenterTop = ui.position.top + 50;
-    $('.'+theId+'-origin').attr({x1:theCenterLeft,y1:theCenterTop});
-    $('.'+theId+'-target').attr({x2:theCenterLeft,y2:theCenterTop});
+    var nodeId = ui.helper[0].getAttribute("id");
+    updateLines(nodeId,ui.position.left,ui.position.top);
   }
   $('div.pico').draggable({ containment: "parent",
                             drag: dragmove })
@@ -19,6 +47,14 @@ $(document).ready(function() {
   $('svg line').click(function(){alert(this)});
   $('div.pico ul li.primary')
     .click(about_primary_pico);
+  updateEdges('p1');
+  updateEdges('p2');
+  updateEdges('p3');
+  updateEdges('p4');
+  updateEdges('p5');
+  updateEdges('p6');
+  updateEdges('p7');
+  updateEdges('p8');
 });
 function about_primary_pico(ev) {
   window.location = "http://kre.github.io/devtools/index.html#about";
@@ -69,7 +105,7 @@ div p {
 Registration experiment has a Pico for each
 section and one for each registering student.
 </p>
-<div class="pico" id="p1" style="left:800px;top:10px;background-color:lightskyblue">
+<div class="pico" id="p1" style="width:80px;left:800px;top:10px;background-color:lightskyblue">
 Owner Pico
 <ul>
 <li class="primary">About</li>
@@ -79,7 +115,7 @@ Owner Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" id="p2" style="left:450px;top:150px;background-color:aquamarine">
+<div class="pico" id="p2" style="width:120px;left:450px;top:150px;background-color:aquamarine">
 Registration Pico
 <ul>
 <li>About</li>
@@ -89,7 +125,7 @@ Registration Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" id="p3" style="left:600px;top:300px;background-color:aquamarine">
+<div class="pico" id="p3" style="width:160px;left:600px;top:300px;background-color:aquamarine">
 Student Collection Pico
 <ul>
 <li>About</li>
@@ -99,7 +135,7 @@ Student Collection Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" id="p4" style="left:250;top:300px;background-color:aquamarine">
+<div class="pico" id="p4" style="width:160px;left:250;top:300px;background-color:aquamarine">
 Section Collection Pico
 <ul>
 <li>About</li>
@@ -109,7 +145,7 @@ Section Collection Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" id="p5" style="left:150px;top:500px;background-color:hotpink">
+<div class="pico" id="p5" style="width:150px;left:150px;top:500px;background-color:hotpink">
 Section CS462-1 Pico
 <ul>
 <li>About</li>
@@ -119,7 +155,7 @@ Section CS462-1 Pico
 <li>Logging</li>
 </ul>
 </div>
-<div class="pico" id="p6" style="left:350px;top:500px;background-color:hotpink">
+<div class="pico" id="p6" style="width:150px;left:350px;top:500px;background-color:hotpink">
 Section CS462-2 Pico
 <ul>
 <li>About</li>
@@ -150,13 +186,13 @@ Student B Pico
 </ul>
 </div>
 <svg>
-  <line class="p1-origin p2-target" x1="850" y1="60" x2="500" y2="200"></line>
-  <line class="p2-origin p3-target" x1="500" y1="200" x2="650" y2="350"></line>
-  <line class="p2-origin p4-target" x1="500" y1="200" x2="300" y2="350"></line>
-  <line class="p4-origin p5-target" x1="300" y1="350" x2="200" y2="550"></line>
-  <line class="p4-origin p6-target" x1="300" y1="350" x2="400" y2="550"></line>
-  <line class="p3-origin p7-target" x1="650" y1="350" x2="550" y2="550"></line>
-  <line class="p3-origin p8-target" x1="650" y1="350" x2="750" y2="550"></line>
+  <line class="p1-origin p2-target"></line>
+  <line class="p2-origin p3-target"></line>
+  <line class="p2-origin p4-target"></line>
+  <line class="p4-origin p5-target"></line>
+  <line class="p4-origin p6-target"></line>
+  <line class="p3-origin p7-target"></line>
+  <line class="p3-origin p8-target"></line>
 </svg>
 </div>
 </body>
