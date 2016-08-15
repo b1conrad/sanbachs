@@ -1,9 +1,9 @@
-<html>
+<html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <title>Registration experiment</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   var leftRadius = function(nodeId) {
@@ -62,19 +62,19 @@ $(document).ready(function() {
                left: $(this).css('left') };
              var $pediv = $(this).next('.pico-edit');
              var fadeAway = function(ev) {
-                              $pediv.find('.x').fadeOut();
+                              $pediv.find('button').remove();
                               $pediv.animate(fadeOutOptions);
                               $pediv.fadeOut();
                               ev.stopPropagation();
                             };
              $pediv.fadeIn();
-             $pediv.animate(fadeInOptions);
-             $pediv.find('.x').fadeIn();
-             $pediv.find('.x').click(fadeAway);
+             $pediv.animate(fadeInOptions,
+                            function(){
+                              $pediv.prepend("<button>X</button>");
+                              $pediv.find('button').click(fadeAway);
+                            });
            });
   $('svg line').click(function(){alert(this)});
-  $('div.pico ul li.primary')
-    .click(about_primary_pico);
   updateEdges('p1');
   updateEdges('p2');
   updateEdges('p3');
@@ -84,10 +84,6 @@ $(document).ready(function() {
   updateEdges('p7');
   updateEdges('p8');
 });
-function about_primary_pico(ev) {
-  window.location = "http://kre.github.io/devtools/index.html#about";
-  ev.stopPropagation();
-}
 </script>
 <style type="text/css">
 div.pico {
@@ -114,15 +110,15 @@ div.pico-edit ul {
   margin: 0px;
   padding: 0 0 0 20px;
   font-size: 70%;
+  list-style-type: none;
 }
-div.pico-edit .x {
-  display: none;
+div.pico-edit ul li {
+  display: inline;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 div.pico-edit button {
   float: right;
-}
-div.pico ul li.primary {
-  cursor: pointer;
 }
 svg {
   width: 100%;
@@ -166,22 +162,19 @@ section and one for each registering student.
 Owner Pico
 </div>
 <div class="pico-edit" style="width:80px;left:800px;top:10px;background-color:lightskyblue">
-<button class="x">X</button>
 Owner Pico
 <ul>
-<li class="primary">About</li>
+<li>About</li>
 <li>Rulesets</li>
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
-<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p2" style="width:120px;left:450px;top:150px;background-color:aquamarine">
 Registration Pico
 </div>
 <div class="pico-edit" style="width:120px;left:450px;top:150px;background-color:aquamarine">
-<button class="x">X</button>
 Registration Pico
 <ul>
 <li>About</li>
@@ -189,14 +182,12 @@ Registration Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
-<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p3" style="width:160px;left:600px;top:300px;background-color:aquamarine">
 Student Collection Pico
 </div>
 <div class="pico-edit" style="width:160px;left:600px;top:300px;background-color:aquamarine">
-<button class="x">X</button>
 Student Collection Pico
 <ul>
 <li>About</li>
@@ -204,14 +195,12 @@ Student Collection Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
-<li class="x">Done</li>
 </ul>
 </div>
-<div class="pico" id="p4" style="width:160px;left:250;top:300px;background-color:aquamarine">
+<div class="pico" id="p4" style="width:160px;left:250px;top:300px;background-color:aquamarine">
 Section Collection Pico
 </div>
-<div class="pico-edit" style="width:160px;left:250;top:300px;background-color:aquamarine">
-<button class="x">X</button>
+<div class="pico-edit" style="width:160px;left:250px;top:300px;background-color:aquamarine">
 Section Collection Pico
 <ul>
 <li>About</li>
@@ -219,14 +208,12 @@ Section Collection Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
-<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p5" style="width:150px;left:150px;top:500px;background-color:hotpink">
 Section CS462-1 Pico
 </div>
 <div class="pico-edit" style="width:150px;left:150px;top:500px;background-color:hotpink">
-<button class="x">X</button>
 Section CS462-1 Pico
 <ul>
 <li>About</li>
@@ -234,14 +221,12 @@ Section CS462-1 Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
-<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p6" style="width:150px;left:350px;top:500px;background-color:hotpink">
 Section CS462-2 Pico
 </div>
 <div class="pico-edit" style="width:150px;left:350px;top:500px;background-color:hotpink">
-<button class="x">X</button>
 Section CS462-2 Pico
 <ul>
 <li>About</li>
@@ -249,14 +234,12 @@ Section CS462-2 Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
-<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p7" style="left:500px;top:500px;background-color:lightsteelblue">
 Student A Pico
 </div>
 <div class="pico-edit" style="left:500px;top:500px;background-color:lightsteelblue">
-<button class="x">X</button>
 Student A Pico
 <ul>
 <li>About</li>
@@ -264,14 +247,12 @@ Student A Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
-<li class="x">Done</li>
 </ul>
 </div>
 <div class="pico" id="p8" style="left:700px;top:500px;background-color:lightsteelblue">
 Student B Pico
 </div>
 <div class="pico-edit" style="left:700px;top:500px;background-color:lightsteelblue">
-<button class="x">X</button>
 Student B Pico
 <ul>
 <li>About</li>
@@ -279,7 +260,6 @@ Student B Pico
 <li>Channels</li>
 <li>Subscriptions</li>
 <li>Logging</li>
-<li class="x">Done</li>
 </ul>
 </div>
 <svg>
